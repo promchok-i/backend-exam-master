@@ -70,7 +70,7 @@ class Classroom(BaseModel):
     school = models.ForeignKey(School, on_delete=models.CASCADE, related_name='classrooms')
     
     def __str__(self):
-        return f'โรงเรียน {self.school.name}, ชั้น {self.get_grade_display()}/{self.room} '
+        return f'โรงเรียน {self.school.name}, ชั้น {self.get_grade_display()}/{self.room}'
     
     
 class Teacher(BaseModel):

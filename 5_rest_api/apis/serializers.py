@@ -13,6 +13,7 @@ class SchoolListSerializer(serializers.ModelSerializer):
         model = School
         fields = '__all__'
         
+        
 class SchoolDetailSerializer(serializers.ModelSerializer):
     classrooms_count = serializers.SerializerMethodField()
     teachers_count = serializers.SerializerMethodField()
@@ -32,6 +33,7 @@ class SchoolDetailSerializer(serializers.ModelSerializer):
         return Student.objects.filter(classroom__school=obj).count()
     
     
+    
 # Teacher Serializer
 class TeacherListSerializer(serializers.ModelSerializer):
     gender = serializers.SerializerMethodField()
@@ -47,6 +49,7 @@ class TeacherListSerializer(serializers.ModelSerializer):
     def get_classroom(self, obj):
         return [str(classroom) for classroom in obj.classroom.all()]
         
+        
 class TeacherDetailSerializer(serializers.ModelSerializer):
     gender = serializers.SerializerMethodField()
     classroom = serializers.SerializerMethodField()
@@ -61,6 +64,7 @@ class TeacherDetailSerializer(serializers.ModelSerializer):
 
     def get_classroom(self, obj):
         return [str(classroom) for classroom in obj.classroom.all()]
+    
     
 class TeacherCreateUpdateSerializer(serializers.ModelSerializer):
 
@@ -99,6 +103,7 @@ class StudentSerializer(serializers.ModelSerializer):
     def get_classroom(self, obj):
         return str(obj.classroom)
     
+    
 class StudentCreateUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -116,6 +121,7 @@ class StudentCreateUpdateSerializer(serializers.ModelSerializer):
         return data
     
     
+
 # Classroom Serializer
 class ClassroomListSerializer(serializers.ModelSerializer):
     grade = serializers.SerializerMethodField()
@@ -127,6 +133,7 @@ class ClassroomListSerializer(serializers.ModelSerializer):
         
     def get_grade(self, obj):
         return obj.get_grade_display()
+        
         
 class ClassroomDetailSerializer(serializers.ModelSerializer):
     teachers = TeacherListSerializer(many=True, read_only=True)
@@ -141,12 +148,20 @@ class ClassroomDetailSerializer(serializers.ModelSerializer):
     def get_grade(self, obj):
         return obj.get_grade_display()
     
-class ClassroomCreateUpdateSerializer(serializers.ModelSerializer):
+    
+class ClassroomCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Classroom
         fields = ['grade', 'room', 'school']
-        
+
+
+class ClassroomUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Classroom
+        fields = ['grade', 'room']
+    
     
 class ClassroomAfterSaveSerializer(serializers.ModelSerializer):
     grade = serializers.SerializerMethodField()

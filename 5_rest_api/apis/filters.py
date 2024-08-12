@@ -4,7 +4,7 @@ from apis.models import School, Classroom, Teacher, Student
 
 # code here
 class BasePersonFilter(FilterSet):
-    school = filters.CharFilter(field_name="classroom__school__name", lookup_expr='icontains')
+    school = filters.CharFilter(field_name="school__name", lookup_expr='icontains')
     grade = filters.CharFilter(field_name="classroom__grade", lookup_expr='icontains')
     room = filters.CharFilter(field_name="classroom__room", lookup_expr='icontains')
     first_name = filters.CharFilter(field_name="first_name", lookup_expr='icontains')
