@@ -4,8 +4,7 @@ from apis.filters import TeacherFilter
 from apis.models import Teacher
 from apis.serializers import (TeacherListSerializer,
                               TeacherDetailSerializer,
-                              TeacherCreateUpdateSerializer,
-                              TeacherAfterSaveSerializer)
+                              TeacherCreateUpdateSerializer)
 
     
     
